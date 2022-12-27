@@ -59,6 +59,9 @@ class MQTTClient:
         data = self.__prepare_data(payload=payload, topics=[*topics, topic])
         await self.queues.mqtt_message.put(MQTTPublisherData(data=data))
 
+    async def publish_messages(self, data: dict):
+        await self.queues.mqtt_message.put(MQTTPublisherData(data=data))
+
     async def publish_force(self, payload: dict, topic: Optional[str] = None, topics: Optional[list] = None):
         data = self.__prepare_data(payload=payload, topics=[*topics, topic])
         try:
