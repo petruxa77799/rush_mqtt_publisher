@@ -9,7 +9,7 @@ from .dataclasses import Settings, Queues, MQTTPublisherData
 logger = logging.getLogger(__name__)
 
 
-class MQTTPublisher:
+class MQTTClient:
     def __init__(self, mqtt_service_host: str, mqtt_service_token: str, worker_count: int = 5):
         self.settings = Settings(
             mqtt_service_host=mqtt_service_host, mqtt_service_token=mqtt_service_token, worker_count=worker_count

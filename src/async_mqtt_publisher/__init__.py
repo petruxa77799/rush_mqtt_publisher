@@ -1,1 +1,1 @@
-from .main import MQTTPublisher
+from .main import MQTTClient

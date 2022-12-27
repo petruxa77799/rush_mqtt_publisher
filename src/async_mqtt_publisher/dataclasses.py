@@ -1,10 +1,5 @@
 from dataclasses import dataclass
 from asyncio import Queue
-from typing import Optional, List
-
-import aiohttp
-
-from .choices import Priorities
 
 
 @dataclass
