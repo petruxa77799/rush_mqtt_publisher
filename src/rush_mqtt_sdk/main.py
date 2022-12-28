@@ -55,7 +55,8 @@ class MQTTClient:
             except Exception as e:
                 logger.exception(e)
 
-    def _prepare_topics(self, topic: Optional[str] = None, topics: Optional[list] = None) -> List:
+    @staticmethod
+    def _prepare_topics(topic: Optional[str] = None, topics: Optional[list] = None) -> List:
         tcs = []
         if topics:
             tcs = topics
