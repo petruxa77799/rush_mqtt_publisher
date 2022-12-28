@@ -92,3 +92,4 @@ class MQTTClient:
             await self.queues.mqtt_message.put(None)
 
         await check_shutdown_tasks(tasks=self.__tasks)
+        await self.aio_session.close()
