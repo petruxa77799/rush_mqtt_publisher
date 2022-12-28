@@ -55,15 +55,23 @@ class MQTTClient:
             except Exception as e:
                 logger.exception(e)
 
+    def _prepare_topics(self, topic: Optional[str] = None, topics: Optional[list] = None) -> List:
+        tcs = []
+        if topics:
+            tcs = topics
+        if topic:
+            tcs.append(topic)
+        return tcs
+
     async def publish_message(self, payload: dict, topic: Optional[str] = None, topics: Optional[list] = None):
-        data = self.__prepare_data(payload=payload, topics=[*topics, topic])
+        data = self.__prepare_data(payload=payload, topics=self._prepare_topics(topic=topic, topics=topics))
         await self.queues.mqtt_message.put(MQTTPublisherData(data=data))
 
     async def publish_messages(self, data: dict):
         await self.queues.mqtt_message.put(MQTTPublisherData(data=data))
 
     async def publish_force(self, payload: dict, topic: Optional[str] = None, topics: Optional[list] = None):
-        data = self.__prepare_data(payload=payload, topics=[*topics, topic])
+        data = self.__prepare_data(payload=payload, topics=self._prepare_topics(topic=topic, topics=topics))
         try:
             resp, status = await self.__send(data=data)
         except Exception as e:
